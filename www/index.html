@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSConf Plays Nodebots</title>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+   <script src="./socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h4 class="center-align">jsconf plays</h4>
+      <br />
+      <br />
+      <br />
+      <div class="row">
+        <div class="col s12">
+          <div class="center-align">
+            <!-- <a class="waves-effect waves-light btn center-align" id="led">led</i></a> -->
+            <!-- <input type="text"></input><a class="waves-effect waves-light btn center-align" id="speed">speed</i></a> -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="center-align">
+            <a class="waves-effect waves-light btn center-align" id="forward">forward</i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="center-align">
+            <a class="waves-effect waves-light btn" id="turn-left">turn-left</a>
+            <a class="waves-effect waves-light btn" id="turn-right">turn right</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="center-align">
+            <a class="waves-effect waves-light btn" id="backward">backward</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="center-align">
+          <a class="waves-effect waves-light btn red" id="stop">stop</a>
+        </div>
+      </div>
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        var socket = io.connect('http://ff186773.ngrok.io');
+
+        $('#led').click(function (e){
+          console.log('click');
+          socket.emit('led');
+          e.preventDefault();
+        });
+        $('#forward').click(function (e){
+          socket.emit('forward');
+          e.preventDefault();
+        });
+        $('#backward').click(function (e){
+          socket.emit('backward');
+          e.preventDefault();
+        });
+        $('#turn-left').click(function (e){
+          socket.emit('turn left');
+          e.preventDefault();
+        });
+
+        $('#turn-right').click(function (e){
+          socket.emit('turn right');
+          e.preventDefault();
+        });
+
+        $('#stop').click(function (e){
+          socket.emit('stop');
+          e.preventDefault();
+        });
+      });
+    </script>
+  </body>
+</html>
